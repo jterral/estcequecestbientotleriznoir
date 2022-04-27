@@ -1,14 +1,29 @@
 <template>
-    <div class="home">
-        <h1>{{ message }}</h1>
-        <br>
-        <h6>{{ description }}</h6>
-    </div>
+  <div class="home">
+    <h1>{{ message }}</h1>
+    <br>
+    <h6>{{ description }}</h6>
+  </div>
 </template>
 
 <script>
 export default {
+  name: "LeRizNoir",
   data() {
+    return {
+      message: "",
+      description: ""
+    }
+  },
+  beforeMount() {
+    clearInterval(this.interval)
+  },
+  mounted() {
+    this.setBlackedRice();
+    setInterval(() => this.setBlackedRice(), 1000)
+  },
+  methods: {
+    setBlackedRice() {
       var message = "Ce n'est pas encore l'heure du riz noir 🤷‍♂️";
       var description = "L'abus de riz noir est dangereux pour la santé, à consommer avec modération.";
       const current = new Date();
@@ -30,9 +45,8 @@ export default {
           message = "Nop ! Ce n'est plus l'heure du riz noir 😓";
       }
 
-    return {
-      message,
-      description
+      this.message = message;
+      this.description = description;
     }
   }
 }

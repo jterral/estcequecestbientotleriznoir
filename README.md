@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 ![VueJS Version](https://img.shields.io/badge/vue.js-3.2.13-33A06F?logo=vue.js)
 
-## Project setup
+## 🔨 Project setup
 
 ```sh
 npm install
