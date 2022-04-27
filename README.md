@@ -38,7 +38,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Local
 
+Build and start container:
+
 ```sh
 $> docker build -t estcequecestbientotleriznoir .
-$> docker run --rm -it -p 8080:8080 --name estcequecestbientotleriznoir-app estcequecestbientotleriznoir
+$> docker run --rm -it -p 8080:80 --name estcequecestbientotleriznoir-app estcequecestbientotleriznoir
+```
+
+Execute command:
+
+```sh
+$> docker exec -it estcequecestbientotleriznoir-app sh
 ```
