@@ -19,11 +19,11 @@ export default {
     clearInterval(this.interval)
   },
   mounted() {
-    this.setBlackedRice();
-    setInterval(() => this.setBlackedRice(), 1000)
+    this.setBlackRice();
+    setInterval(() => this.setBlackRice(), 1000)
   },
   methods: {
-    setBlackedRice() {
+    setBlackRice() {
       var message = "Ce n'est pas encore l'heure du riz noir 🤷‍♂️";
       var description = "L'abus de riz noir est dangereux pour la santé, à consommer avec modération.";
       const current = new Date();
