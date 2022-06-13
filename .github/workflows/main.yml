@@ -9,7 +9,6 @@ on:
       - main
 
 jobs:
-
   build:
     name: 🔨 build-app
     runs-on: ubuntu-latest
@@ -61,7 +60,7 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
     defaults:
       run:
-        working-directory: 'terraform'
+        working-directory: "terraform"
     steps:
       - uses: actions/checkout@v3
       - name: Setup Terraform
@@ -93,6 +92,7 @@ jobs:
     needs: terraform
     # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     timeout-minutes: 2
+    environment: production
     steps:
       - name: Download site
         uses: actions/download-artifact@v2
@@ -104,9 +104,11 @@ jobs:
           ls -al *
       - uses: azure/login@v1
         with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Upload to blob storage
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az storage blob upload-batch --account-name storblackrice  --auth-mode key -d '$web' -s ./artifact-site/*
+            az storage blob upload-batch --account-name 'storblackrice'  --auth-mode key -d '$web' -s .
+      - run: az logout
+        if: always()
