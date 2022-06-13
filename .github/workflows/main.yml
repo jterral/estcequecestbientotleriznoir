@@ -84,13 +84,29 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
 
   deploy:
     name: 🚀 deploy
     runs-on: ubuntu-latest
     needs: terraform
+    # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     timeout-minutes: 2
     steps:
-      - uses: actions/checkout@v3
+      - name: Download site
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-site
+      - run: |
+          pwd
+          ls -al
+          ls -al *
+      - uses: azure/login@v1
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch --account-name storblackrice  --auth-mode key -d '$web' -s ./artifact-site/*
