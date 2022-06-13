@@ -57,6 +57,7 @@ jobs:
       run:
         working-directory: 'terraform'
     env:
+      ARM_SAS_TOKEN: ${{ secrets.ARM_SAS_TOKEN }}
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
