@@ -98,10 +98,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: artifact-site
-      - run: |
-          pwd
-          ls -al
-          ls -al *
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}

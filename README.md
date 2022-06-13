@@ -55,7 +55,8 @@ $> docker exec -it estcequecestbientotleriznoir-app sh
 
 ```
 $ az login
-$ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/SUBSCRIPTION_ID"
+$ az ad sp create-for-rbac --name "blackrice" --role="Contributor" --scopes="/subscriptions/SUBSCRIPTION_ID" --sdk-auth
+
 $ export ARM_CLIENT_ID="00000000-0000-0000-0000-000000000000"
 $ export ARM_CLIENT_SECRET="00000000-0000-0000-0000-000000000000"
 $ export ARM_SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"
