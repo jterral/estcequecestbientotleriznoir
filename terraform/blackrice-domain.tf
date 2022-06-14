@@ -1,6 +1,6 @@
 # blackrice-domain.tf
 
-data "azurerm_dns_zone" "static-web-dnszone" {
+resource "azurerm_dns_zone" "static-web-dnszone" {
   name                = "estcequecestbientotleriznoir.fr"
   resource_group_name = azurerm_resource_group.resource-group.name
 }
