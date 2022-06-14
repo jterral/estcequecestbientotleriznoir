@@ -54,11 +54,11 @@ resource "azurerm_cdn_endpoint" "static-web-endpoint" {
   }
 
   delivery_rule {
-    name = "spaURLReroute"
+    name  = "spaURLReroute"
     order = "1"
 
     url_file_extension_condition {
-      operator = "LessThan"
+      operator     = "LessThan"
       match_values = ["1"]
     }
 
@@ -70,17 +70,17 @@ resource "azurerm_cdn_endpoint" "static-web-endpoint" {
   }
 
   delivery_rule {
-    name = "EnforceHTTPS"
+    name  = "EnforceHTTPS"
     order = "2"
 
     request_scheme_condition {
-      operator = "Equal"
+      operator     = "Equal"
       match_values = ["HTTP"]
     }
 
     url_redirect_action {
       redirect_type = "Found"
-      protocol = "Https"
+      protocol      = "Https"
     }
   }
 }

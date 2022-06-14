@@ -6,6 +6,6 @@ output "storage_account_name" {
 }
 
 output "static_website_url" {
-  value = azurerm_cdn_endpoint.static-web-endpoint.origin
+  value       = azurerm_cdn_endpoint.static-web-endpoint.origin
   description = "CDN Endpoint Url."
 }
