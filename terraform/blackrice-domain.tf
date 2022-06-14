@@ -8,7 +8,7 @@ data "azurerm_dns_zone" "static-web-dnszone" {
 resource "azurerm_dns_cname_record" "static-web-dnszone-record" {
   name                = "www"
   zone_name           = data.azurerm_dns_zone.static-web-dnszone.name
-  resource_group_name = data.azurerm_dns_zone.static-web-dnszone.resource_group_name
+  resource_group_name = azurerm_resource_group.resource-group.name
   ttl                 = 3600
   target_resource_id  = azurerm_cdn_endpoint.static-web-endpoint.id
 }
