@@ -105,6 +105,6 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az storage blob upload-batch --account-name 'storblackrice'  --auth-mode key -d '$web' -s .
+            az storage blob upload-batch --account-name 'stblackrice' --auth-mode key -d '$web' -s .
       - run: az logout
         if: always()
