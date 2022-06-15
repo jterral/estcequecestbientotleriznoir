@@ -1,19 +1,15 @@
 # resources.tf
 
-resource "azurerm_resource_group" "resource-group" {
-  name     = "rg-jootl-blackrice"
-  location = var.location
-
-  tags = {
-    product     = local.product
-    environment = var.environment
-  }
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-blackrice"
+  location = var.regions["primary"]
+  tags     = local.tags
 }
 
-resource "azurerm_storage_account" "storage-account" {
-  name                      = "storblackrice"
-  resource_group_name       = azurerm_resource_group.resource-group.name
-  location                  = azurerm_resource_group.resource-group.location
+resource "azurerm_storage_account" "stor" {
+  name                      = "stblackrice"
+  resource_group_name       = azurerm_resource_group.rg.name
+  location                  = azurerm_resource_group.rg.location
   account_kind              = "StorageV2"
   account_tier              = "Standard"
   account_replication_type  = "LRS"
@@ -23,35 +19,30 @@ resource "azurerm_storage_account" "storage-account" {
     index_document = "index.html"
   }
 
-  tags = {
-    product     = local.product
-    environment = var.environment
-  }
+  tags = local.tags
 }
 
-resource "azurerm_cdn_profile" "static-web-cdnprofile" {
-  name                = "static-web-blackrice-cdnprofile"
-  location            = azurerm_resource_group.resource-group.location
-  resource_group_name = azurerm_resource_group.resource-group.name
+resource "azurerm_cdn_profile" "cdnp" {
+  name                = "cdnp-blackrice"
+  location            = var.regions["cdn"]
+  resource_group_name = azurerm_resource_group.rg.name
   sku                 = "Standard_Microsoft"
-
-  tags = {
-    product     = local.product
-    environment = var.environment
-  }
+  tags                = local.tags
 }
 
-resource "azurerm_cdn_endpoint" "static-web-endpoint" {
-  name                = "static-web-blackrice-endpoint"
-  profile_name        = azurerm_cdn_profile.static-web-cdnprofile.name
-  location            = azurerm_resource_group.resource-group.location
-  resource_group_name = azurerm_resource_group.resource-group.name
-  origin_host_header  = azurerm_storage_account.storage-account.primary_web_host
+resource "azurerm_cdn_endpoint" "cdne" {
+  name                = "cdne-blackrice"
+  profile_name        = azurerm_cdn_profile.cdnp.name
+  location            = azurerm_cdn_profile.cdnp.location
+  resource_group_name = azurerm_resource_group.rg.name
+  origin_host_header  = azurerm_storage_account.stor.primary_web_host
 
   origin {
     name      = "blackriceweb"
-    host_name = azurerm_storage_account.storage-account.primary_web_host
+    host_name = azurerm_storage_account.stor.primary_web_host
   }
+
+  tags = local.tags
 
   delivery_rule {
     name  = "spaURLReroute"

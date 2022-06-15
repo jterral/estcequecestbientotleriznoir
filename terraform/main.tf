@@ -9,8 +9,8 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg-jootl-data"
-    storage_account_name = "storjootl"
+    resource_group_name  = "rg-data"
+    storage_account_name = "stjootl"
     container_name       = "tfstates"
     key                  = "terraform.blackrice.tfstate"
   }

@@ -1,5 +1,9 @@
 # locals.tf
 
 locals {
-  product = "blackrice"
+  tags = {
+    "environment"  = var.environment
+    "organization" = "jootl"
+    "product"      = "blackrice"
+  }
 }

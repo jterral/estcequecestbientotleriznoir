@@ -1,20 +1,22 @@
 # blackrice-domain.tf
 
-resource "azurerm_dns_zone" "static-web-dnszone" {
-  name                = "estcequecestbientotleriznoir.fr"
-  resource_group_name = azurerm_resource_group.resource-group.name
+resource "azurerm_dns_zone" "dns" {
+  name                = var.domain
+  resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.tags
 }
 
-resource "azurerm_dns_cname_record" "static-web-dnszone-record" {
+resource "azurerm_dns_cname_record" "www_cname" {
   name                = "www"
-  zone_name           = azurerm_dns_zone.static-web-dnszone.name
-  resource_group_name = azurerm_resource_group.resource-group.name
+  zone_name           = azurerm_dns_zone.dns.name
+  resource_group_name = azurerm_resource_group.rg.name
   ttl                 = 3600
-  target_resource_id  = azurerm_cdn_endpoint.static-web-endpoint.id
+  target_resource_id  = azurerm_cdn_endpoint.cdne.id
+  tags                = local.tags
 }
 
-resource "azurerm_cdn_endpoint_custom_domain" "static-web-dnszone-cdomain" {
-  name            = "blackrice-domain"
-  cdn_endpoint_id = azurerm_cdn_endpoint.static-web-endpoint.id
-  host_name       = "${azurerm_dns_cname_record.static-web-dnszone-record.name}.${azurerm_dns_zone.static-web-dnszone.name}"
+resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
+  name            = "cdomain-blackrice"
+  cdn_endpoint_id = azurerm_cdn_endpoint.cdne.id
+  host_name       = "${azurerm_dns_cname_record.www_cname.name}.${azurerm_dns_zone.dns.name}"
 }

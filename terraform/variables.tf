@@ -1,11 +1,19 @@
 # variable.tf
 
-variable "location" {
-  type    = string
-  default = "westeurope"
+variable "regions" {
+  type = map(string)
+  default = {
+    "primary" = "westeurope"
+    "cdn"     = "westeurope"
+  }
 }
 
 variable "environment" {
   type    = string
-  default = "production"
+  default = "prod"
+}
+
+variable "domain" {
+  type    = string
+  default = "estcequecestbientotleriznoir.fr"
 }
