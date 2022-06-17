@@ -1,29 +1,7 @@
-# resources.tf
-
-resource "azurerm_resource_group" "rg" {
-  name     = "rg-blackrice"
-  location = var.regions["primary"]
-  tags     = local.tags
-}
-
-resource "azurerm_storage_account" "stor" {
-  name                      = "stblackrice"
-  resource_group_name       = azurerm_resource_group.rg.name
-  location                  = azurerm_resource_group.rg.location
-  account_kind              = "StorageV2"
-  account_tier              = "Standard"
-  account_replication_type  = "LRS"
-  enable_https_traffic_only = true
-
-  static_website {
-    index_document = "index.html"
-  }
-
-  tags = local.tags
-}
+# cdn.tf
 
 resource "azurerm_cdn_profile" "cdnp" {
-  name                = "cdnp-blackrice"
+  name                = "cdnp-${var.site_id}"
   location            = var.regions["cdn"]
   resource_group_name = azurerm_resource_group.rg.name
   sku                 = "Standard_Microsoft"
@@ -31,14 +9,14 @@ resource "azurerm_cdn_profile" "cdnp" {
 }
 
 resource "azurerm_cdn_endpoint" "cdne" {
-  name                = "cdne-blackrice"
+  name                = "cdne-${var.site_id}"
   profile_name        = azurerm_cdn_profile.cdnp.name
   location            = azurerm_cdn_profile.cdnp.location
   resource_group_name = azurerm_resource_group.rg.name
   origin_host_header  = azurerm_storage_account.stor.primary_web_host
 
   origin {
-    name      = "blackriceweb"
+    name      = "${var.site_id}web"
     host_name = azurerm_storage_account.stor.primary_web_host
   }
 
@@ -74,4 +52,10 @@ resource "azurerm_cdn_endpoint" "cdne" {
       protocol      = "Https"
     }
   }
+}
+
+resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
+  name            = "cdomain-${var.site_id}"
+  cdn_endpoint_id = azurerm_cdn_endpoint.cdne.id
+  host_name       = "${azurerm_dns_cname_record.www_cname.name}.${azurerm_dns_zone.dns.name}"
 }

@@ -1,5 +1,10 @@
 # variable.tf
 
+variable "site_id" {
+  type        = string
+  description = "id of the website"
+}
+
 variable "regions" {
   type = map(string)
   default = {

@@ -1,4 +1,4 @@
-# blackrice-domain.tf
+# dns.tf
 
 resource "azurerm_dns_zone" "dns" {
   name                = var.domain
@@ -13,10 +13,4 @@ resource "azurerm_dns_cname_record" "www_cname" {
   ttl                 = 3600
   target_resource_id  = azurerm_cdn_endpoint.cdne.id
   tags                = local.tags
-}
-
-resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
-  name            = "cdomain-blackrice"
-  cdn_endpoint_id = azurerm_cdn_endpoint.cdne.id
-  host_name       = "${azurerm_dns_cname_record.www_cname.name}.${azurerm_dns_zone.dns.name}"
 }

@@ -15,3 +15,8 @@ terraform {
     key                  = "terraform.blackrice.tfstate"
   }
 }
+
+module "website" {
+  source  = "./modules/site"
+  site_id = "blackrice"
+}
