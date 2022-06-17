@@ -58,4 +58,9 @@ resource "azurerm_cdn_endpoint_custom_domain" "custom_domain" {
   name            = "cdomain-${var.site_id}"
   cdn_endpoint_id = azurerm_cdn_endpoint.cdne.id
   host_name       = "${azurerm_dns_cname_record.www_cname.name}.${azurerm_dns_zone.dns.name}"
+
+  cdn_managed_https {
+    certificate_type = "Dedicated"
+    protocol_type    = "ServerNameIndication"
+  }
 }
