@@ -1,12 +1,32 @@
-# Est-ce que c'est bientôt le riz noir
-
-> For Benji
-
-![Build Status](https://github.com/jterral/estcequecestbientotleriznoir/actions/workflows/main/badge.svg)
+[![main](https://github.com/jterral/estcequecestbientotleriznoir/actions/workflows/main.yml/badge.svg)](https://github.com/jterral/estcequecestbientotleriznoir/actions/workflows/main.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 ![VueJS Version](https://img.shields.io/badge/vue.js-3.2.13-33A06F?logo=vue.js)
 
-## 🔨 Project setup
+<br />
+<div align="center">
+  <a href="https://github.com/jterral/estcequecestbientotleriznoir">
+    <p style="font-size:48px">
+        🍚
+    </p>
+  </a>
+
+  <h3 align="center">Est-ce que c'est bientôt le riz noir ?</h3>
+
+  <p align="center">
+    An awesome website for Benjamin!
+    <br />
+    <br />
+    <a href="https://www.estcequecestbientotleriznoir.fr/">View Site</a>
+    ·
+    <a href="https://github.com/jterral/estcequecestbientotleriznoir/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/jterral/estcequecestbientotleriznoir/issues">Request Feature</a>
+  </p>
+</div>
+
+## Getting Started
+
+### Installation
 
 ```sh
 npm install
@@ -30,35 +50,36 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## 🐋 Dockerize
+## Dockerize
 
 ### Local
 
 Build and start container:
 
 ```sh
-$> docker build -t estcequecestbientotleriznoir .
-$> docker run --rm -it -p 8080:80 --name estcequecestbientotleriznoir-app estcequecestbientotleriznoir
+docker build -t estcequecestbientotleriznoir .
+docker run --rm -it -p 8080:80 --name estcequecestbientotleriznoir-app estcequecestbientotleriznoir
 ```
 
-Execute command:
+## Terraform to Azure
+
+### Connect to Azure
 
 ```sh
-$> docker exec -it estcequecestbientotleriznoir-app sh
+az login
 ```
 
-## Azure
+### Terraform
 
-```
-$ az login
-$ az ad sp create-for-rbac --name "blackrice" --role="Contributor" --scopes="/subscriptions/SUBSCRIPTION_ID" --sdk-auth
+In `terraform` folder.
 
-$ export ARM_CLIENT_ID="00000000-0000-0000-0000-000000000000"
-$ export ARM_CLIENT_SECRET="00000000-0000-0000-0000-000000000000"
-$ export ARM_SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"
-$ export ARM_TENANT_ID="00000000-0000-0000-0000-000000000000"
+```sh
+terraform init
+terraform validate
+terraform fmt
+terraform plan
 ```
+
+## License
+
+Distributed under the MIT License. See LICENSE for more information.
