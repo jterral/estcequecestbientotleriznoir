@@ -4,10 +4,8 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/jterral/estcequecestbientotleriznoir" style="font-size:48px">
-    <p style="font-size:48px">
-        🍚
-    </p>
+  <a href="https://github.com/jterral/estcequecestbientotleriznoir">
+    <img src="public/favicon.ico" alt="Logo" width="48" height="48">
   </a>
 
   <h3 align="center">Est-ce que c'est bientôt le riz noir ?</h3>
