@@ -4,7 +4,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/jterral/estcequecestbientotleriznoir">
+  <a href="https://github.com/jterral/estcequecestbientotleriznoir" style="font-size:48px">
     <p style="font-size:48px">
         🍚
     </p>
