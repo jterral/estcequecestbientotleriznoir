@@ -95,7 +95,7 @@ jobs:
     environment: production
     steps:
       - name: Download site
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: artifact-site
       - uses: azure/login@v1
