@@ -13,7 +13,7 @@ jobs:
     name: 🔨 build-app
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 14
@@ -35,7 +35,7 @@ jobs:
       tag: ${{ steps.compute.outputs.tag }}
       version: ${{ steps.compute.outputs.version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Compute version
         id: compute
         run: |
@@ -62,7 +62,7 @@ jobs:
       run:
         working-directory: "terraform"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
       - name: Terraform Format
